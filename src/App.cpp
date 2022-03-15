@@ -1,6 +1,9 @@
 #include "App.h"
+#include <iostream>
 
 void App::start() {
-	if (demo.Construct(320, 240, 1, 1))
-		demo.Start();
+	std::cout << "Hello!\n";
+	demo.CalculateDonut(0, 0);
+	demo.RenderDonut();
+	std::cout << "Goodbye!\n";
 }
