@@ -1,5 +1,28 @@
 #include "Donut.h"
-#include <cmath>
+
+Donut::Donut() {
+    hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+
+    if (hOut == INVALID_HANDLE_VALUE) {
+        perror("Invalid handle value!");
+        exit(EXIT_FAILURE);
+    }
+
+    DWORD dwMode = 0;
+    
+    if (!GetConsoleMode(hOut, &dwMode)) {
+        perror("Invalid terminal mode!");
+        exit(EXIT_FAILURE);
+    }
+
+    dwMode |= ENABLE_VIRTUAL_TERMINAL_PROCESSING;
+
+    if (!SetConsoleMode(hOut, dwMode)) {
+        perror("Error setting terminal mode!");
+        exit(EXIT_FAILURE);
+    }
+    wprintf(L"\x1b[31mThis text has a red foreground using SGR.31.\r\n");
+}
 
 void Donut::CalculateDonut(float A, float B) {
     // Reset output buffers

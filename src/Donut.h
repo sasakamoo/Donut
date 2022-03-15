@@ -1,6 +1,10 @@
 #ifndef DONUT_H_DEF
 #define DONUT_H_DEF
 
+#include <cmath>
+#include <wchar.h>
+#include <windows.h>
+
 #define PI 3.14159265358979323846
 
 #define SCREENWIDTH 20
@@ -21,8 +25,10 @@ private:
 
     char brightness[13] = ".,-~:;=!*#$@";
 
+    HANDLE hOut;
+
 public:
-    Donut() = default;
+    Donut();
 
 public:
     void CalculateDonut(float A, float B);
