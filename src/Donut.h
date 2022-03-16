@@ -1,9 +1,9 @@
 #ifndef DONUT_H_DEF
 #define DONUT_H_DEF
 
+#include <iostream>
 #include <cmath>
-#include <wchar.h>
-#include <windows.h>
+#include "Terminal.h"
 
 #define PI 3.14159265358979323846
 
@@ -25,10 +25,10 @@ private:
 
     char brightness[13] = ".,-~:;=!*#$@";
 
-    HANDLE hOut;
+    Terminal terminal;
 
 public:
-    Donut();
+    Donut() = default;
 
 public:
     void CalculateDonut(float A, float B);

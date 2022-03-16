@@ -2,8 +2,8 @@
 #include <iostream>
 
 void App::start() {
-	std::cout << "Hello!\n";
+	printf("Hello!\n");
 	demo.CalculateDonut(0, 0);
 	demo.RenderDonut();
-	std::cout << "Goodbye!\n";
+	printf("Goodbye!\n");
 }

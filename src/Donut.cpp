@@ -1,29 +1,5 @@
 #include "Donut.h"
 
-Donut::Donut() {
-    hOut = GetStdHandle(STD_OUTPUT_HANDLE);
-
-    if (hOut == INVALID_HANDLE_VALUE) {
-        perror("Invalid handle value!");
-        exit(EXIT_FAILURE);
-    }
-
-    DWORD dwMode = 0;
-    
-    if (!GetConsoleMode(hOut, &dwMode)) {
-        perror("Invalid terminal mode!");
-        exit(EXIT_FAILURE);
-    }
-
-    dwMode |= ENABLE_VIRTUAL_TERMINAL_PROCESSING;
-
-    if (!SetConsoleMode(hOut, dwMode)) {
-        perror("Error setting terminal mode!");
-        exit(EXIT_FAILURE);
-    }
-    wprintf(L"\x1b[31mThis text has a red foreground using SGR.31.\r\n");
-}
-
 void Donut::CalculateDonut(float A, float B) {
     // Reset output buffers
     for (int i = 0; i < SCREENWIDTH * SCREENHEIGHT; i++) {
@@ -78,11 +54,13 @@ void Donut::CalculateDonut(float A, float B) {
 }
 
 void Donut::RenderDonut() {
-    //printf("\x1b[H");
+
+    // Clear terminal
+    terminal.clearTerminal();
+
     for (int j = 0; j < SCREENHEIGHT; j++) {
         for (int i = 0; i < SCREENWIDTH; i++) {
-            //std::cout << outputBuffer[i + j * SCREENWIDTH];
+            
         }
-        //std::cout << '\n';
     }
 }
