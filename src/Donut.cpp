@@ -54,7 +54,6 @@ void Donut::CalculateDonut(float A, float B) {
 }
 
 void Donut::RenderDonut() {
-
     // Clear terminal
     terminal.clearTerminal();
 
