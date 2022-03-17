@@ -56,6 +56,7 @@ void Donut::CalculateDonut(float A, float B) {
 void Donut::RenderDonut() {
     // Clear terminal
     terminal.clearTerminal();
+    terminal.print("HELLO WORLD!\n");
 
     for (int j = 0; j < SCREENHEIGHT; j++) {
         for (int i = 0; i < SCREENWIDTH; i++) {

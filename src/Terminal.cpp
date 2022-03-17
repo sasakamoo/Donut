@@ -40,3 +40,11 @@ void Terminal::clearTerminal(char fillChar) {
     FillConsoleOutputAttribute(terminalHandle, csbi.wAttributes, cells, home, &written);
     SetConsoleCursorPosition(terminalHandle, home);
 }
+
+void Terminal::print(const char* string) {
+    HANDLE terminalHandle = GetStdHandle(STD_OUTPUT_HANDLE);
+    COORD home = { 0, 0 };
+    CONSOLE_SCREEN_BUFFER_INFO csbi;
+    GetConsoleScreenBufferInfo(terminalHandle, &csbi);
+    WriteConsole(terminalHandle, string, (DWORD) strlen(string), NULL, NULL);
+}

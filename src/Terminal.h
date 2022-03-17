@@ -13,6 +13,7 @@ public:
     ~Terminal();
 
     void clearTerminal(char fillChar = ' ');
+    void print(const char* string);
 
 };
 
