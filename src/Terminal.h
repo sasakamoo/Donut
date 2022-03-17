@@ -12,9 +12,8 @@ public:
     ~Terminal();
 
     void clearTerminal(char fillChar = ' ');
+    void print(char* string);
     void print(const char* string);
-
 };
-
 
 #endif

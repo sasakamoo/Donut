@@ -1,4 +1,5 @@
 #include "Donut.h"
+#include <iostream>
 
 void Donut::CalculateDonut(float A, float B) {
     // Reset output buffers
@@ -14,13 +15,13 @@ void Donut::CalculateDonut(float A, float B) {
     float cosB = std::cos(B);
 
     // theta goes around the cross-sectional circle of a torus
-    for (float theta = 0; theta < 2*PI; theta += theta_spacing) {
+    for (float theta = 0.0f; theta < 2.0f*PI; theta += theta_spacing) {
         // precompute sin and cos of theta
         float sinTheta = std::sin(theta);
         float cosTheta = std::cos(theta);
 
         // phi goes around the center of revolution of a torus
-        for (float phi = 0; phi < 2*PI; phi += phi_spacing) {
+        for (float phi = 0.0f; phi < 2.0f*PI; phi += phi_spacing) {
             // precompute sin and cos of phi
             float sinPhi = std::sin(phi);
             float cosPhi = std::cos(phi);
@@ -33,7 +34,7 @@ void Donut::CalculateDonut(float A, float B) {
             float x = circleX*(cosB*cosPhi + sinA*sinB*sinPhi) - circleY*cosA*sinB;
             float y = circleX*(sinB*cosPhi - sinA*cosB*sinPhi) + circleY*cosA*cosB;
             float z = K2 + cosA*circleX*sinPhi + circleY*sinA;
-            float ooz = 1 / z;
+            float ooz = 1.0f / z;
 
             // Project back into 2D space
             int xp = (int) (SCREENWIDTH/2.0f + K1*ooz*x);
@@ -41,11 +42,11 @@ void Donut::CalculateDonut(float A, float B) {
 
             // Calculate Luminance (L ranges [-sqrt(2), +sqrt(2)])
             float L = cosPhi*cosTheta*sinB - cosA*cosTheta*sinPhi - sinA*sinTheta + cosB*(cosA*sinTheta - cosTheta*sinA*sinPhi);
-            if (L > 0) {
+            if (L > 0.0f && xp >= 0 && xp < SCREENWIDTH && yp >= 0 && yp < SCREENHEIGHT) {
                 // Test against the zBuffer
                 if (ooz > zBuffer[xp + yp * SCREENWIDTH]) {
                     zBuffer[xp + yp * SCREENWIDTH] = ooz;
-                    int luminance_index = L * 8;
+                    unsigned int luminance_index = L * 8;
                     outputBuffer[xp + yp * SCREENWIDTH] = brightness[luminance_index];
                 }
             }
@@ -56,11 +57,14 @@ void Donut::CalculateDonut(float A, float B) {
 void Donut::RenderDonut() {
     // Clear terminal
     terminal.clearTerminal();
-    terminal.print("HELLO WORLD!\n");
 
     for (int j = 0; j < SCREENHEIGHT; j++) {
+        char rowBuffer[SCREENWIDTH+1];
         for (int i = 0; i < SCREENWIDTH; i++) {
-            
+            rowBuffer[i] = outputBuffer[i + j * SCREENWIDTH];
         }
+        rowBuffer[SCREENWIDTH] = '\0';
+        //terminal.print(rowBuffer);
+        std::cout << rowBuffer;
     }
 }

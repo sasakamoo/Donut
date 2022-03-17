@@ -1,14 +1,13 @@
 #ifndef DONUT_H_DEF
 #define DONUT_H_DEF
 
-#include <iostream>
 #include <cmath>
 #include "Terminal.h"
 
-#define PI 3.14159265358979323846
+#define PI 3.14159265358979323846f
 
-#define SCREENWIDTH 20
-#define SCREENHEIGHT 5
+#define SCREENWIDTH 160
+#define SCREENHEIGHT 20
 
 class Donut {
 private:
@@ -18,12 +17,12 @@ private:
     float R1 = 1.0f;
     float R2 = 2.0f;
     float K2 = 5.0f;
-    float K1 = SCREENWIDTH * K2 * 3 / (8 * (R1 + R2));
+    float K1 = SCREENWIDTH * K2 * 3.0f / (8.0f * (R1 + R2));
 
     float zBuffer[SCREENWIDTH * SCREENHEIGHT];
     char outputBuffer[SCREENWIDTH * SCREENHEIGHT];
 
-    char brightness[13] = ".,-~:;=!*#$@";
+    const char* brightness = ".,-~:;=!*#$@";
 
     Terminal terminal;
 
