@@ -5,7 +5,6 @@
 
 class Terminal {
 private:
-    DWORD size;
     DWORD originalMode;
 
 public:
